@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import type { FormEvent } from 'react';
-import { Icon, MachineIcon } from '../components/Icons';
+import { Icon } from '../components/Icons';
 import { EquipmentCard } from '../components/EquipmentCard';
 import { Breadcrumbs, PageHeading } from '../components/PageElements';
 import { categories, money, today } from '../data';
