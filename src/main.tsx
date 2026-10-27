@@ -9,6 +9,7 @@ import EquipmentDetailPage from "./pages/EquipmentDetailPage";
 import { ServicesPage, ServiceDetailPage } from "./pages/ServicesPage";
 import QuotePage from "./pages/QuotePage";
 import ListEquipmentPage from "./pages/ListEquipmentPage";
+import AuthPage, { AccountPage, RequireAccount } from './pages/AuthPage';
 import { SavedPage, RequestsPage } from "./pages/WorkspacePages";
 import { HowItWorksPage, AboutPage, NotFoundPage } from "./pages/InfoPages";
 import "./index.css";
@@ -26,10 +27,12 @@ createRoot(document.getElementById("root")!).render(
             <Route path="equipment/:id" element={<EquipmentDetailPage />} />
             <Route path="services" element={<ServicesPage />} />
             <Route path="services/:slug" element={<ServiceDetailPage />} />
-            <Route path="request-quote" element={<QuotePage />} />
-            <Route path="list-equipment" element={<ListEquipmentPage />} />
-            <Route path="saved" element={<SavedPage />} />
-            <Route path="requests" element={<RequestsPage />} />
+            <Route path="login" element={<AuthPage />} />
+            <Route path="account" element={<RequireAccount><AccountPage /></RequireAccount>} />
+            <Route path="request-quote" element={<RequireAccount><QuotePage /></RequireAccount>} />
+            <Route path="list-equipment" element={<RequireAccount owner><ListEquipmentPage /></RequireAccount>} />
+            <Route path="saved" element={<RequireAccount><SavedPage /></RequireAccount>} />
+            <Route path="requests" element={<RequireAccount><RequestsPage /></RequireAccount>} />
             <Route path="how-it-works" element={<HowItWorksPage />} />
             <Route path="about" element={<AboutPage />} />
             <Route path="*" element={<NotFoundPage />} />
