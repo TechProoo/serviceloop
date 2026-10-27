@@ -63,8 +63,10 @@ test('shows an empty catalog when the API has no equipment', async ({ page }) =>
 });
 
 for (const port of [5183, 5184]) test(`waitlist ${port} reports success only after an API acknowledgement`, async ({ page }) => {
-  await page.goto(`http://127.0.0.1:${port}`); await page.locator('#name').fill('Waitlist Builder'); await page.locator('#phone').fill('+2348012345678');
-  if (port === 5184) { await page.getByLabel('Email address').fill('waitlist@browser.test'); await page.getByLabel('I am a...').selectOption('Builder / Contractor'); }
+  await page.goto(`http://127.0.0.1:${port}`);
+  await expect(page.locator('.form-area input')).toHaveCount(2);
+  await expect(page.locator('.form-area select')).toHaveCount(0);
+  await page.locator('#name').fill('Waitlist Builder'); await page.locator('#phone').fill('08012345678');
   await page.route('**/api/waitlist', route => route.abort()); await page.getByRole('button', { name: 'Join the waitlist', exact: true }).click();
   await expect(page.getByRole('alert')).toContainText('Cannot reach ServiceLoop'); await expect(page.locator('.success-number')).toHaveCount(0);
   await page.unroute('**/api/waitlist'); await page.getByRole('button', { name: 'Join the waitlist', exact: true }).click(); await expect(page.locator('.success-number')).toContainText('Your interest has been recorded.');
