@@ -11,6 +11,9 @@ import QuotePage from "./pages/QuotePage";
 import ListEquipmentPage from "./pages/ListEquipmentPage";
 import AuthPage, { AccountPage, RequireAccount } from './pages/AuthPage';
 import { SavedPage, RequestsPage } from "./pages/WorkspacePages";
+import BookingPage from './pages/BookingPage';
+import BookingsDashboard from './pages/BookingsDashboard';
+import BookingInspectionPage from './pages/BookingInspectionPage';
 import { HowItWorksPage, AboutPage, NotFoundPage } from "./pages/InfoPages";
 import "./index.css";
 import "./App.css";
@@ -33,6 +36,10 @@ createRoot(document.getElementById("root")!).render(
             <Route path="list-equipment" element={<RequireAccount owner><ListEquipmentPage /></RequireAccount>} />
             <Route path="saved" element={<RequireAccount><SavedPage /></RequireAccount>} />
             <Route path="requests" element={<RequireAccount><RequestsPage /></RequireAccount>} />
+            <Route path="bookings" element={<RequireAccount><BookingsDashboard /></RequireAccount>} />
+            <Route path="bookings/:id" element={<RequireAccount><BookingPage /></RequireAccount>} />
+            <Route path="bookings/:id/handover" element={<RequireAccount><BookingInspectionPage stage="handover" /></RequireAccount>} />
+            <Route path="bookings/:id/return" element={<RequireAccount><BookingInspectionPage stage="return" /></RequireAccount>} />
             <Route path="how-it-works" element={<HowItWorksPage />} />
             <Route path="about" element={<AboutPage />} />
             <Route path="*" element={<NotFoundPage />} />
